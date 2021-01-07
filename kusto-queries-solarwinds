@@ -36,6 +36,7 @@ DeviceEvents
 and AdditionalFields has ".avsvmcloud"
 //
 
+//Solorigate - The actor has been observed adding credentials (x509 keys or password credentials) to one or more legitimate OAuth Applications or Service Principals, usually with existing Mail.Read or Mail.ReadWrite permissions, which grants the ability to read mail content from Exchange Online via Microsoft Graph or Outlook REST.
 CloudAppEvents
 | where Application == "Office 365"
 | where ActionType == "Consent to application."
@@ -52,6 +53,7 @@ CloudAppEvents
  | project AddSecretTime = Timestamp, AccountDisplayName , spnID 
  ) on spnID 
 | where ConsentTime < AddSecretTime and AccountDisplayName <> AccountDisplayName1
+//
 
 //query detects network connection events involving DNS lookups associated with the Solorigate threat actor's command-and-control infrastructure
 DeviceNetworkEvents
